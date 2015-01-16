@@ -70,7 +70,7 @@ d3Tree(List=CanadaPC, fontsize=10, diameter=1200, textColour="#D95F0E", linkColo
 ericOpenHtml("test6.html")
 
 
-#d3Sankey 사용2
+#d3Sankey 사용
 URL <- "https://raw.githubusercontent.com/christophergandrud/d3Network/sankey/JSONdata/energy.json"
 Energy <- getURL(URL, ssl.verifypeer = FALSE)
 
