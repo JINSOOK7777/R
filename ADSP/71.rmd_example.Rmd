@@ -1,0 +1,61 @@
+# 1. 데이터 수집
+## (1) Data 수집 script
+### Quandl library load
+Quandl 패키지를 이용해 데이터 수집을 하기 위해 패키지를 설치하고, 메모리로 로드시킨다. 저자는 패키지가 설치되어 있으므로 이 부분은 생략한다.
+
+```{r}
+# install.packages("Quandl")
+library(Quandl)
+
+fx_krw_usd<-Quandl("CURRFX/USDKRW", trim_start="2009-07-01", trim_end="2014-06-30")
+fx_krw_usd<-fx_krw_usd[,-c(3:4)]
+names(fx_krw_usd)[2]<-"f_krw_usd"
+fx_krw_usd<-fx_krw_usd[order(fx_krw_usd$Date),]
+head(fx_krw_usd,3);tail(fx_krw_usd,3)
+```
+
+## (2) Data 원천
+데이터 원천은 아래와 같이 두 가지로 받았다.
+
+1. Quandl <https://www.quandl.com/>
+  + Google finance
+  + Yahoo Finance
+  + ...
+2. krx indices http://index.krx.co.kr/index.jsp
+
+krx 지수 구분
+
+* krx 시리즈
+  + 대표 지수
+  + 섹터 지수
+* krx 채권 지수
+
+## (3) Quandl data source
+
+(a) set the shape neatly
+
+Variables  | Data source
+---------- | --------------------------
+fx_krw_usd | Quandl("QUANDL/USDKRW")
+stck_kospi | Quandl("YAHOO/INDEX_KS11")
+fx_krw_aud | Quandl("QUANDL/AUDKRW")
+
+(b) neglect the shape
+
+Variables | Data source
+- | -
+fx_krw_usd | Quandl("QUANDL/USDKRW")
+stck_kospi | Quandl("YAHOO/INDEX_KS11")
+fx_krw_aud | Quandl("QUANDL/AUDKRW")
+
+## (4) KRX 자료 다운로드
+
+(a) KRX 지수 찾기 (italic)
+지수사이트에 접속해 *KRX지수* > _주가지수_ > _KRX시리즈_를 선택한다.
+
+(b) KRX 금리 찾기 (bold)
+지수사이트에 접속해 **KRX지수** > __채권지수__ > __KRX채권지수__를 선택한다.
+
+![icon1](http://index.krx.co.kr/inc/img/cm/icon_device_default.ico)
+
+![icon2](/Users/TIM/Documents/PUBLISH/Project_rmd/image/icon_device_default.ico)
