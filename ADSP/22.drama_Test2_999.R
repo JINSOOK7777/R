@@ -1,4 +1,4 @@
-install.packages("gdata")
+# install.packages("gdata")
 library(gdata)
 library(sqldf)
 library(party)
@@ -85,7 +85,7 @@ text(mymodel)
 #rpart와 party의 그래프는 1을 기준으로 하는 값 자체가 다르므로 그림이 다르게 표현될 수는 있음(rpart 50%로 자르고, party는 모집단의 %로 자르게 되므로... )
 #그래서 rpart는 as.party하여 출력한다. 그러나 분석내용 자체가 바뀌는 건 아니다. 시각화 출력시만 다름
 
-install.packages("partykit")
+# install.packages("partykit")
 library(partykit)
 
 mymodel1 <- as.party(mymodel)
@@ -106,4 +106,17 @@ table(predict(mymodel,newdata=ts),ts$target)
 # row가 더 필요하다
 # 타방송사 데이터도 더 필요하다
 # 장르구분, 작가등도 데이터를 추가하여 복합적으로 분석하는 게 필요하다.
+
+
+# 중요변수 자동 추출
+library(caret)
+mycaret <- train(target~.,data=tr)
+Imp<-varImp(mycaret)
+plot(Imp)
+confusionMatrix(mycaret)
+table(predict(mymodel,newdata=ts),ts$target)
+
+
+
+
 
